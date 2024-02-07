@@ -4,9 +4,16 @@
 <script>
   tamaal = document.getElementById("tamaal");
   imgfile = document.getElementById("imgfle");
+  var pasturl
   function filesChanged() {
-    if (this.files.length = 0) {
-      return;
+    const [file] = this.files
+    if (file) {
+      if (pasturl) {
+        URL.revokeObjectURL(pasturl)
+      }
+      pasturl = URL.createObjectURL(file)
+      imgfile.setAttribute("src", pasturl)
     }
-    
+  } 
+  tamaal.addEventListener("changed", filesChanged, false)
 </script>
